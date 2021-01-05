@@ -1,0 +1,1 @@
+from .passenger import Passenger
