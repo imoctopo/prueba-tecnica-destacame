@@ -4,5 +4,7 @@ from ..serializers import TicketSerializer, RideSerializer
 
 
 class RideViewSet(viewsets.ModelViewSet):
-    queryset = Ride.objects.all()
     serializer_class = RideSerializer
+
+    def get_queryset(self):
+        return Ride.objects.all()

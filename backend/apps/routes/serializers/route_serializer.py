@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from ..models import Route
-from ...core.errors_messages import INVALID_EXACT_LENGTH
+from ...common.errors_messages import INVALID_EXACT_LENGTH
 
 
 class RouteSerializer(serializers.ModelSerializer):

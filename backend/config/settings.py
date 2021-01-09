@@ -42,8 +42,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    'apps.core.apps.CoreConfig',
     'apps.buses.apps.BusesConfig',
+    'apps.common.apps.CommonConfig',
     'apps.drivers.apps.DriversConfig',
     'apps.passengers.apps.PassengersConfig',
     'apps.rides.apps.RidesConfig',

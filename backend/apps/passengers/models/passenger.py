@@ -1,7 +1,12 @@
 from django.db import models
 
-from backend.apps.core.models import Person
+from ...common.models import Person
+from ...rides.models import Ride
 
 
 class Passenger(Person):
-    pass
+    @property
+    def rides(self):
+        tickets = self.tickets.all()
+        rides_ = Ride.objects.filter(tickets__in=tickets).distinct()
+        return rides_

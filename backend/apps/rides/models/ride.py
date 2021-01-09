@@ -1,10 +1,13 @@
 from django.db import models
 from django.utils import timezone
 
+from ...buses.models import Bus
+from ...routes.models import Route
+
 
 class Ride(models.Model):
-    route = models.ForeignKey('routes.Route', on_delete=models.CASCADE, related_name='rides')
-    bus = models.ForeignKey('buses.Bus', on_delete=models.CASCADE, related_name='rides')
+    route = models.ForeignKey(Route, on_delete=models.CASCADE, related_name='rides')
+    bus = models.ForeignKey(Bus, on_delete=models.CASCADE, related_name='rides')
     schedule = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

@@ -6,3 +6,10 @@ class RideSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ride
         fields = '__all__'
+
+
+class RideDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ride
+        fields = '__all__'
+        depth = 2

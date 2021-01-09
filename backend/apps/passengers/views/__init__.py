@@ -1,1 +1,1 @@
-from .passengers_views import PassengerViewSet
+from .passengers_views import PassengerViewSet, PassengerRideViewSet, PassengerTicketViewSet
