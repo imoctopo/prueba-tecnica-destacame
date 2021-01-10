@@ -11,4 +11,4 @@ class Ride(models.Model):
     schedule = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f'{self.route.number} - {self.bus.licence_plate}'
+        return f'[{self.id}]: {self.route.number} - {self.bus.licence_plate}'

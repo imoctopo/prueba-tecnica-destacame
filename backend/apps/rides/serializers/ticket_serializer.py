@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import Ticket, Ride
+from ..models import Ticket
 from ...common.errors_messages import SEAT_TAKEN, PASSENGER_ALREADY_IN_THIS_RIDE, NO_FREE_SEATS
 
 
@@ -20,7 +20,6 @@ class TicketSerializer(serializers.ModelSerializer):
             self.fields.pop(field)
 
     def validate(self, attrs):
-        # if not self.instance:
         ride = attrs['ride']
         passenger = attrs['passenger']
         ticket_pk = self.instance.id if self.instance else None

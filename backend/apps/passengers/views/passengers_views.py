@@ -34,7 +34,7 @@ class PassengerTicketViewSet(viewsets.GenericViewSet):
         return passenger.tickets
 
     def retrieve(self, request, **kwargs):
-        return Response(self.get_serializer(self.get_object()).data)
+        return Response(self.get_serializer(self.get_object(), remove_fields=['passenger']).data)
 
     def list(self, request, **kwargs):
-        return Response(self.get_serializer(self.get_queryset(), many=True).data)
+        return Response(self.get_serializer(self.get_queryset(), many=True, remove_fields=['passenger']).data)

@@ -1,5 +1,3 @@
-from django.db import models
-
 from ...common.models import Person
 from ...rides.models import Ride
 
