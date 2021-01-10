@@ -1,1 +1,1 @@
-from .buses_views import BusViewSet
+from .buses_views import BusViewSet, BusRidesViewSet
