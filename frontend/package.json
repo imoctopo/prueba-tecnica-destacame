@@ -1,5 +1,6 @@
 {
-  "name": "frontend",
+  "author": "Camilo Fernández <camilofernandezespinoza@gmail.com>",
+  "name": "destacame",
   "version": "0.1.0",
   "private": true,
   "scripts": {
