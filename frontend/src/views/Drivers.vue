@@ -3,13 +3,13 @@
     <Breadcrumb/>
     <div class="row">
       <div class="col">
-        <h1>Buses</h1>
+        <h1>Drivers</h1>
       </div>
       <div class="col">
         <div class="d-flex flex-row-reverse">
           <router-link
               class="btn btn-success float-right"
-              :to="{name: 'BusEditor', params: {id:'new'}}"
+              :to="{name: 'DriverEditor', params: {id:'new'}}"
           >
             <i class="bi bi-plus-circle"></i> New
           </router-link>
@@ -20,36 +20,33 @@
       <thead>
       <tr>
         <th>#</th>
-        <th>Driver</th>
-        <th>Licence Plate</th>
+        <th>Name</th>
+        <th>Last Name</th>
         <th>Actions</th>
       </tr>
       </thead>
       <tbody>
-      <tr v-if="buses.length === 0">
-        <td colspan="4">No buses found</td>
+      <tr v-if="drivers.length === 0">
+        <td colspan="4">No drivers found</td>
       </tr>
       <tr
-          v-for="(bus, index) in buses"
+          v-for="(driver, index) in drivers"
           :key="index"
       >
-        <th>{{ bus.id }}</th>
-        <th class="col-6">
-          <span v-if="bus.driver">{{ bus.driver.name }} {{ bus.driver.last_name }}</span>
-          <span v-else>No driver set...</span>
-        </th>
-        <th class="col-6">{{ bus.licence_plate }}</th>
+        <th>{{ driver.id }}</th>
+        <th class="col-6">{{ driver.name }}</th>
+        <th class="col-6">{{ driver.last_name }}</th>
         <th>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <router-link
                 class="btn btn-warning mr-3"
-                :to="{name: 'BusEditor', params: {id: bus.id}}"
+                :to="{name: 'DriverEditor', params: {id: driver.id}}"
             >
               <i class="bi bi-pencil"></i>
             </router-link>
             <button
                 class="btn btn-danger"
-                @click="deleteBus(bus.id)"
+                @click="deleteDriver(driver.id)"
             >
               <i class="bi bi-trash"></i>
             </button>
@@ -61,21 +58,21 @@
     <Pagination :previous="previous" :next="next" :totalPages="totalPages" :activePage.sync="activePage"/>
   </div>
 </template>
-
 <script>
+
 import APIService from "@/common/api.service";
 import Breadcrumb from "@/components/Breadcrumb";
 import Pagination from "@/components/Pagination";
 
 export default {
-  name: "Buses",
+  name: 'Drivers',
   components: {
     Breadcrumb,
     Pagination
   },
   data() {
     return {
-      buses: [],
+      drivers: [],
       activePage: 1,
       totalPages: 1,
       next: null,
@@ -83,30 +80,28 @@ export default {
     }
   },
   methods: {
-    async fetchBuses() {
-      const {data} = await APIService.list(`buses?page=${this.activePage}`);
-      this.buses = data.results;
+    async fetchDrivers() {
+      const {data} = await APIService.list(`drivers?page=${this.activePage}`);
+      this.drivers = data.results;
       this.next = data.next;
       this.previous = data.previous;
       this.totalPages = data.total_pages;
     },
-    async deleteBus(id) {
-      await APIService.delete('buses', id);
+    async deleteDriver(id) {
+      await APIService.delete('drivers', id);
       this.activePage = 1;
-      await this.fetchBuses();
+      await this.fetchDrivers();
     }
   },
   watch: {
     activePage(page) {
       this.activePage = page;
-      this.fetchBuses();
+      this.fetchDrivers();
     }
   },
   mounted() {
     APIService.init();
-    this.fetchBuses();
+    this.fetchDrivers();
   }
 }
 </script>
-
-<style scoped></style>

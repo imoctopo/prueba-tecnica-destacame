@@ -1,23 +1,36 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
     <div class="container">
-      <a class="navbar-brand" href="#">Destácame Rides</a>
+      <router-link class="navbar-brand" :to="{ name: 'Home' }">Destácame Rides</router-link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
+          <li class="nav-item">
+            <router-link :to="{name:'Home'}" class="nav-link" active-class="active" exact>
+              Home
+            </router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+            <router-link :to="{name:'Routes'}" class="nav-link" active-class="active" exact>
+              Routes
+            </router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+            <router-link :to="{name:'Drivers'}" class="nav-link" active-class="active" exact>
+              Drivers
+            </router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
+            <router-link :to="{name:'Buses'}" class="nav-link" active-class="active" exact>
+              Buses
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{name:'Passengers'}" class="nav-link" active-class="active" exact>
+              Passengers
+            </router-link>
           </li>
         </ul>
       </div>
@@ -31,6 +44,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

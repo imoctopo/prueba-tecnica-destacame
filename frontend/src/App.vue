@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <Header></Header>
+    <Header/>
+    <router-view/>
   </div>
 </template>
 
@@ -8,12 +9,11 @@
 import Header from "@/components/Header";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Header,
+    Header
   }
 }
 </script>
 
-<style>
-</style>
+<style scoped></style>
