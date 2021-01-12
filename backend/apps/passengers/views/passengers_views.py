@@ -4,12 +4,14 @@ from rest_framework.generics import get_object_or_404
 
 from ..models import Passenger
 from ..serializers import PassengerSerializer
+from ...common.pagination import DefaultPagination
 from ...rides.serializers import TicketDetailSerializer, RideDetailSerializer
 
 
 class PassengerViewSet(viewsets.ModelViewSet):
     queryset = Passenger.objects.all()
     serializer_class = PassengerSerializer
+    pagination_class = DefaultPagination
 
 
 class PassengerRideViewSet(viewsets.GenericViewSet):

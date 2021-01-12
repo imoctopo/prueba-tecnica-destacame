@@ -4,12 +4,14 @@ from rest_framework.response import Response
 
 from ..models import Bus
 from ..serializers import BusSerializer
+from ...common.pagination import DefaultPagination
 from ...rides.serializers import RideDetailSerializer
 
 
 class BusViewSet(viewsets.ModelViewSet):
     queryset = Bus.objects.all()
     serializer_class = BusSerializer
+    pagination_class = DefaultPagination
 
 
 class BusRidesViewSet(viewsets.GenericViewSet):

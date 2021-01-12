@@ -7,6 +7,9 @@ class Bus(models.Model):
     driver = models.OneToOneField(Driver, on_delete=models.SET_NULL, blank=True, null=True)
     licence_plate = models.CharField(max_length=6, unique=True)
 
+    class Meta:
+        ordering = ['id']
+
     def __str__(self):
         return self.licence_plate
 

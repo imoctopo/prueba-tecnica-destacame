@@ -4,9 +4,10 @@ import Home from '@/views/Home.vue'
 import Drivers from "@/views/Drivers";
 import DriverEditor from "@/views/DriverEditor";
 import Passengers from "@/views/Passengers";
+import PassengerEditor from "@/views/PassengerEditor";
 import Buses from "@/views/Buses";
-import Routes from "@/views/Routes";
 import BusEditor from "@/views/BusEditor";
+import Routes from "@/views/Routes";
 
 
 Vue.use(VueRouter)
@@ -53,6 +54,18 @@ const routes = [
             breadcrumb: [
                 {name: 'Home', link: '/'},
                 {name: 'Passengers'}
+            ]
+        }
+    },
+    {
+        path: '/passengers/:id',
+        name: 'PassengerEditor',
+        component: PassengerEditor,
+        meta: {
+            breadcrumb: [
+                {name: 'Home', link: '/'},
+                {name: 'Passengers', link: '/passengers'},
+                {name: 'Editor'}
             ]
         }
     },

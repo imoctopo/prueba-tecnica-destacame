@@ -33,13 +33,13 @@
           v-for="(bus, index) in buses"
           :key="index"
       >
-        <th>{{ bus.id }}</th>
-        <th class="col-6">
+        <td>{{ bus.id }}</td>
+        <td class="col-6">
           <span v-if="bus.driver">{{ bus.driver.name }} {{ bus.driver.last_name }}</span>
           <span v-else>No driver set...</span>
-        </th>
-        <th class="col-6">{{ bus.licence_plate }}</th>
-        <th>
+        </td>
+        <td class="col-6">{{ bus.licence_plate }}</td>
+        <td>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <router-link
                 class="btn btn-warning mr-3"
@@ -54,7 +54,7 @@
               <i class="bi bi-trash"></i>
             </button>
           </div>
-        </th>
+        </td>
       </tr>
       </tbody>
     </table>

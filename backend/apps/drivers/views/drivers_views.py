@@ -8,3 +8,8 @@ class DriverViewSet(viewsets.ModelViewSet):
     queryset = Driver.objects.all()
     serializer_class = DriverSerializer
     pagination_class = DefaultPagination
+
+    def paginate_queryset(self, queryset):
+        if 'all' in self.request.query_params:
+            return None
+        return super().paginate_queryset(queryset)

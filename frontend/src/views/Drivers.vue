@@ -33,10 +33,10 @@
           v-for="(driver, index) in drivers"
           :key="index"
       >
-        <th>{{ driver.id }}</th>
-        <th class="col-6">{{ driver.name }}</th>
-        <th class="col-6">{{ driver.last_name }}</th>
-        <th>
+        <td>{{ driver.id }}</td>
+        <td class="col-6">{{ driver.name }}</td>
+        <td class="col-6">{{ driver.last_name }}</td>
+        <td>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <router-link
                 class="btn btn-warning mr-3"
@@ -51,7 +51,7 @@
               <i class="bi bi-trash"></i>
             </button>
           </div>
-        </th>
+        </td>
       </tr>
       </tbody>
     </table>
