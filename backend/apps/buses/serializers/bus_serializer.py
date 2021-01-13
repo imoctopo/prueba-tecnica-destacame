@@ -5,6 +5,7 @@ from ...drivers.serializers import DriverSerializer
 
 
 class BusSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(required=False, allow_null=True)
     driver = DriverSerializer(required=False)
 
     class Meta:

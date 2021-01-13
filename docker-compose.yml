@@ -7,18 +7,30 @@ services:
       - "8000:80"
     volumes:
       - ./backend/default.conf:/etc/nginx/conf.d/default.conf
-      - static_volume:/app/static
+      - static_volume:/app/backend/static
     depends_on:
-      - app
+      - backend
 
-  app:
-    container_name: app
+  backend:
+    container_name: backend
     build: ./backend
     volumes:
       - ./backend:/app/backend
-      - static_volume:/app/static
+      - static_volume:/app/backend/static
     command: bash -c "ls && python manage.py migrate && python manage.py collectstatic --no-input --clear &&
-      gunicorn config.asgi:application --workers 4 --bind :8000 --reload --timeout 90 -k uvicorn.workers.UvicornWorker"
+      gunicorn config.wsgi:application --workers 4 --bind :8000 --reload --timeout 90"
+
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    volumes:
+      - ./frontend:/app/frontend
+    command: yarn serve
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend
+
 
 volumes:
   static_volume:

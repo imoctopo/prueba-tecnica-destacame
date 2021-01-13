@@ -10,5 +10,8 @@ class Ride(models.Model):
     bus = models.ForeignKey(Bus, on_delete=models.CASCADE, related_name='rides')
     schedule = models.DateTimeField(default=timezone.now)
 
+    class Meta:
+        ordering = ['id']
+
     def __str__(self):
         return f'[{self.id}]: {self.route.number} - {self.bus.licence_plate}'

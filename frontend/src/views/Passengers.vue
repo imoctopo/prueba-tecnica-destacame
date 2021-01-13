@@ -42,7 +42,7 @@
                 class="btn btn-warning mr-3"
                 :to="{name: 'PassengerEditor', params: {id: passenger.id}}"
             >
-              <i class="bi bi-pencil"></i>
+              <i class="bi bi-eye"></i>
             </router-link>
             <button
                 class="btn btn-danger"

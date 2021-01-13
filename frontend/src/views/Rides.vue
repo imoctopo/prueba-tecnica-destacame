@@ -3,13 +3,13 @@
     <Breadcrumb/>
     <div class="row">
       <div class="col">
-        <h1>Drivers</h1>
+        <h1>Rides</h1>
       </div>
       <div class="col">
         <div class="d-flex flex-row-reverse">
           <router-link
               class="btn btn-success float-right"
-              :to="{name: 'DriverEditor', params: {id:'new'}}"
+              :to="{name: 'RideEditor', params: {id:'new'}}"
           >
             <i class="bi bi-plus-circle"></i> New
           </router-link>
@@ -20,33 +20,41 @@
       <thead>
       <tr>
         <th>#</th>
-        <th>Name</th>
-        <th>Last Name</th>
+        <th class="col-4">Route</th>
+        <th class="col-4">Bus</th>
+        <th class="col-4">Date</th>
         <th>Actions</th>
       </tr>
       </thead>
       <tbody>
-      <tr v-if="drivers.length === 0">
-        <td colspan="4">No drivers found</td>
+      <tr v-if="rides.length === 0">
+        <td colspan="5">No rides found</td>
       </tr>
       <tr
-          v-for="(driver, index) in drivers"
+          v-for="(ride, index) in rides"
           :key="index"
       >
-        <td>{{ driver.id }}</td>
-        <td class="col-6">{{ driver.name }}</td>
-        <td class="col-6">{{ driver.last_name }}</td>
+        <td>{{ ride.id }}</td>
+        <td>
+          {{ ride.route.number }} [{{ ride.route.starting_address }} - {{ ride.route.ending_address }}]
+        </td>
+        <td>
+          {{ ride.bus.licence_plate }}
+          <span v-if="ride.bus.driver">driven by {{ ride.bus.driver.name }} {{ ride.bus.driver.last_name }}</span>
+          <span v-else>no driver set yet...</span>
+        </td>
+        <td>{{ ride.schedule | moment("MMMM Do YYYY [at] h:mm A") }}</td>
         <td>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <router-link
                 class="btn btn-warning mr-3"
-                :to="{name: 'DriverEditor', params: {id: driver.id}}"
+                :to="{name: 'RideEditor', params: {id: ride.id}}"
             >
               <i class="bi bi-eye"></i>
             </router-link>
             <button
                 class="btn btn-danger"
-                @click="deleteDriver(driver.id)"
+                @click="deleteRide(ride.id)"
             >
               <i class="bi bi-trash"></i>
             </button>
@@ -58,21 +66,24 @@
     <Pagination :previous="previous" :next="next" :totalPages="totalPages" :activePage.sync="activePage"/>
   </div>
 </template>
-<script>
 
+<script>
+import Vue from "vue"
 import APIService from "@/common/api.service";
 import Breadcrumb from "@/components/Breadcrumb";
 import Pagination from "@/components/Pagination";
 
+Vue.use(require("vue-moment"))
+
 export default {
-  name: 'Drivers',
+  name: "Rides",
   components: {
     Breadcrumb,
     Pagination
   },
   data() {
     return {
-      drivers: [],
+      rides: [],
       activePage: 1,
       totalPages: 1,
       next: null,
@@ -80,28 +91,32 @@ export default {
     }
   },
   methods: {
-    async fetchDrivers() {
-      const {data} = await APIService.list(`drivers?page=${this.activePage}`);
-      this.drivers = data.results;
+    async fetchRides() {
+      const {data} = await APIService.list(`rides?page=${this.activePage}`);
+      this.rides = data.results;
       this.next = data.next;
       this.previous = data.previous;
       this.totalPages = data.total_pages;
     },
-    async deleteDriver(id) {
-      await APIService.delete('drivers', id);
+    async deleteRide(id) {
+      await APIService.delete('rides', id);
       this.activePage = 1;
-      await this.fetchDrivers();
+      await this.fetchRides();
     }
   },
   watch: {
     activePage(page) {
       this.activePage = page;
-      this.fetchDrivers();
+      this.fetchRides();
     }
   },
   mounted() {
     APIService.init();
-    this.fetchDrivers();
+    this.fetchRides();
   }
 }
 </script>
+
+<style scoped>
+
+</style>

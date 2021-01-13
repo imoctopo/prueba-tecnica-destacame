@@ -7,6 +7,7 @@ from ..models import Route
 from ..serializers import RouteSerializer
 from ...buses.models import Bus
 from ...buses.serializers import BusSerializer
+from ...common.pagination import DefaultPagination
 from ...rides.serializers import TicketDetailSerializer, RideDetailSerializer
 from ...rides.views import TicketViewSet, RideViewSet
 
@@ -14,6 +15,12 @@ from ...rides.views import TicketViewSet, RideViewSet
 class RouteViewSet(viewsets.ModelViewSet):
     serializer_class = RouteSerializer
     queryset = Route.objects.all()
+    pagination_class = DefaultPagination
+
+    def paginate_queryset(self, queryset):
+        if 'all' in self.request.query_params:
+            return None
+        return super().paginate_queryset(queryset)
 
     @action(detail=True, methods=['GET'])
     def buses(self, request, pk):

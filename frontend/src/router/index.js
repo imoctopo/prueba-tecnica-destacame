@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
+import Rides from "@/views/Rides";
+import RideEditor from "@/views/RideEditor";
+import Routes from "@/views/Routes";
+import RouteEditor from "@/views/RouteEditor";
 import Drivers from "@/views/Drivers";
 import DriverEditor from "@/views/DriverEditor";
-import Passengers from "@/views/Passengers";
-import PassengerEditor from "@/views/PassengerEditor";
 import Buses from "@/views/Buses";
 import BusEditor from "@/views/BusEditor";
-import Routes from "@/views/Routes";
+import Passengers from "@/views/Passengers";
+import PassengerEditor from "@/views/PassengerEditor";
 
 
 Vue.use(VueRouter)
@@ -20,6 +23,29 @@ const routes = [
         meta: {
             breadcrumb: [
                 {name: 'Home'},
+            ]
+        }
+    },
+    {
+        path: '/rides',
+        name: 'Rides',
+        component: Rides,
+        meta: {
+            breadcrumb: [
+                {name: 'Home', link: '/'},
+                {name: 'Rides'}
+            ]
+        }
+    },
+    {
+        path: '/rides/:id',
+        name: 'RideEditor',
+        component: RideEditor,
+        meta: {
+            breadcrumb: [
+                {name: 'Home', link: '/'},
+                {name: 'Rides', link: '/rides'},
+                {name: 'Editor'}
             ]
         }
     },
@@ -100,6 +126,18 @@ const routes = [
             breadcrumb: [
                 {name: 'Home', link: '/'},
                 {name: 'Routes'}
+            ]
+        }
+    },
+    {
+        path: '/routes/:id',
+        name: 'RouteEditor',
+        component: RouteEditor,
+        meta: {
+            breadcrumb: [
+                {name: 'Home', link: '/'},
+                {name: 'Routes', link: '/route'},
+                {name: 'Editor'}
             ]
         }
     }

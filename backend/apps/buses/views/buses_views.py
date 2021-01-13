@@ -13,6 +13,11 @@ class BusViewSet(viewsets.ModelViewSet):
     serializer_class = BusSerializer
     pagination_class = DefaultPagination
 
+    def paginate_queryset(self, queryset):
+        if 'all' in self.request.query_params:
+            return None
+        return super().paginate_queryset(queryset)
+
 
 class BusRidesViewSet(viewsets.GenericViewSet):
     serializer_class = RideDetailSerializer

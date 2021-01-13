@@ -13,6 +13,11 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link :to="{name:'Rides'}" class="nav-link" active-class="active" exact>
+              Rides!
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link :to="{name:'Routes'}" class="nav-link" active-class="active" exact>
               Routes
             </router-link>

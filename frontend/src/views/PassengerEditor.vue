@@ -28,46 +28,47 @@
         </div>
       </div>
     </form>
-    <h2 class="mt-5">Tickets</h2>
-    <table class="table table-bordered">
-      <thead>
-      <tr>
-        <th>#</th>
-        <th>Ride</th>
-        <th>Seat</th>
-        <th>Bus</th>
-        <th>Driver</th>
-        <th>Date</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-if="tickets.length === 0">
-        <td colspan="4">No tickets found</td>
-      </tr>
-      <tr
-          v-for="ticket in tickets"
-          :key="ticket.id"
-      >
-        <td>{{ ticket.id }}</td>
-        <td>
-          <i class="bi bi-map"></i>
-          Service: <strong>{{ ticket.ride.route.number }}</strong>
-          Route: <strong>{{ ticket.ride.route.starting_address }} - {{ ticket.ride.route.ending_address }}</strong>
-        </td>
-        <td>{{ ticket.seat }}</td>
-        <td>
-          Licence plate: <strong>{{ ticket.ride.bus.licence_plate }}</strong>
-        </td>
-        <td>
-          <span v-if="ticket.ride.bus.driver">
-            driven by <strong>{{ ticket.ride.bus.driver.name }} {{ ticket.ride.bus.driver.last_name }}</strong>
-          </span>
-          <span v-else>No driver set yet...</span>
-        </td>
-        <td>{{ ticket.ride.schedule | moment("MMMM Do YYYY [at] h:mm A") }}</td>
-      </tr>
-      </tbody>
-    </table>
+    <div v-if="passenger.id">
+      <h2 class="mt-5">Tickets</h2>
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Ride</th>
+          <th>Seat</th>
+          <th>Bus</th>
+          <th>Driver</th>
+          <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-if="tickets.length === 0">
+          <td colspan="4">No tickets found</td>
+        </tr>
+        <tr
+            v-for="ticket in tickets"
+            :key="ticket.id"
+        >
+          <td>{{ ticket.id }}</td>
+          <td>
+            Service: <strong>{{ ticket.ride.route.number }}</strong>
+            Route: <strong>{{ ticket.ride.route.starting_address }} - {{ ticket.ride.route.ending_address }}</strong>
+          </td>
+          <td>{{ ticket.seat }}</td>
+          <td>
+            Licence plate: <strong>{{ ticket.ride.bus.licence_plate }}</strong>
+          </td>
+          <td>
+            <span v-if="ticket.ride.bus.driver">
+              {{ ticket.ride.bus.driver.name }} {{ ticket.ride.bus.driver.last_name }}
+            </span>
+            <span v-else>No driver set yet...</span>
+          </td>
+          <td>{{ ticket.ride.schedule | moment("MMMM Do YYYY [at] h:mm A") }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
