@@ -50,9 +50,7 @@ class RideViewSet(viewsets.GenericViewSet):
 
     @action(detail=True, methods=['GET'], url_path='free-seats')
     def free_seats(self, request, **kwargs):
-        seats = {x for x in range(1, 11)}
-        occupied_seats = {x['seat'] for x in self.get_object().tickets.values('seat')}
-        return Response(sorted(seats - occupied_seats))
+        return Response(self.get_object().free_seats)
 
 
 class TicketViewSet(viewsets.GenericViewSet):

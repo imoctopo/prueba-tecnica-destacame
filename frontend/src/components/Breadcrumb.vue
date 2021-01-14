@@ -1,10 +1,20 @@
 <template>
   <nav>
-    <ol class="breadcrumb">
+    <ol class="breadcrumb" v-if="!new_breadcrumb">
       <li class="breadcrumb-item"
           v-for="(bread, index) in breadcrumb"
           :key="index"
           :class="{'active': breadcrumb.length - 1 === index, 'cursor-pointer': breadcrumb.length - 1 !== index}"
+          @click="routeTo(index)"
+      >
+        {{ bread.name }}
+      </li>
+    </ol>
+    <ol class="breadcrumb" v-else>
+      <li class="breadcrumb-item"
+          v-for="(bread, index) in new_breadcrumb"
+          :key="index"
+          :class="{'active': new_breadcrumb.length - 1 === index, 'cursor-pointer': new_breadcrumb.length - 1 !== index}"
           @click="routeTo(index)"
       >
         {{ bread.name }}
@@ -16,6 +26,11 @@
 <script>
 export default {
   name: "Breadcrumb",
+  props: {
+    new_breadcrumb: {
+      type: Array,
+    }
+  },
   data() {
     return {
       breadcrumb: []

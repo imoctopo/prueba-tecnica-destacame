@@ -16,6 +16,14 @@ class Route(models.Model):
         avg = avg.aggregate(avg=Avg('tickets_sold'))
         return avg['avg']
 
+    @property
+    def total_rides(self):
+        return self.rides.count()
+
+    @property
+    def total_tickets(self):
+        return self.rides.aggregate(total_tickets=Count('tickets'))['total_tickets']
+
     def save(self, *args, **kwargs):
         self.number = str(self.number).upper()
         super().save(*args, **kwargs)

@@ -21,8 +21,9 @@
       <tr>
         <th>#</th>
         <th>Number</th>
-        <th>Starting Address</th>
-        <th>Ending Address</th>
+        <th class="col-4">Starting Address</th>
+        <th class="col-4">Ending Address</th>
+        <th class="col-4">Average Seats Sold</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -35,20 +36,23 @@
           :key="index"
       >
         <td>{{ route.id }}</td>
-        <td class="col-2">
+        <td>
           {{ route.number }}
         </td>
-        <td class="col-5">{{ route.starting_address }}</td>
-        <td class="col-5">{{ route.ending_address }}</td>
+        <td>{{ route.starting_address }}</td>
+        <td>{{ route.ending_address }}</td>
+        <td>{{ route.passenger_average || 0 }} [ {{ route.total_tickets }} tickets in {{ route.total_rides }} rides ]</td>
         <td>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <router-link
+                title="Edit"
                 class="btn btn-warning mr-3"
                 :to="{name: 'RouteEditor', params: {id: route.id}}"
             >
               <i class="bi bi-eye"></i>
             </router-link>
             <button
+                title="Delete"
                 class="btn btn-danger"
                 @click="deleteRoute(route.id)"
             >

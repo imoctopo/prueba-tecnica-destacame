@@ -11,6 +11,7 @@ import Buses from "@/views/Buses";
 import BusEditor from "@/views/BusEditor";
 import Passengers from "@/views/Passengers";
 import PassengerEditor from "@/views/PassengerEditor";
+import TicketEditor from "@/views/TicketEditor";
 
 
 Vue.use(VueRouter)
@@ -46,6 +47,19 @@ const routes = [
                 {name: 'Home', link: '/'},
                 {name: 'Rides', link: '/rides'},
                 {name: 'Editor'}
+            ]
+        }
+    },
+    {
+        path: '/rides/:rideId/tickets/:id',
+        name: 'TicketEditor',
+        component: TicketEditor,
+        meta: {
+            breadcrumb: [
+                {name: 'Home', link: '/'},
+                {name: 'Rides', link: '/rides'},
+                {name: 'rideId', link: '/rides/'},
+                {name: 'New Ticket'}
             ]
         }
     },

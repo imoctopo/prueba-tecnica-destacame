@@ -4,6 +4,7 @@ from ..models import Ride
 
 
 class RideSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Ride
         fields = '__all__'
@@ -16,6 +17,7 @@ class RideSerializer(serializers.ModelSerializer):
 
 class RideDetailSerializer(serializers.ModelSerializer):
     schedule = serializers.SerializerMethodField('get_schedule')
+    free_seats = serializers.ReadOnlyField()
 
     class Meta:
         model = Ride

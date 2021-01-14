@@ -15,3 +15,9 @@ class Ride(models.Model):
 
     def __str__(self):
         return f'[{self.id}]: {self.route.number} - {self.bus.licence_plate}'
+
+    @property
+    def free_seats(self):
+        seats = {x for x in range(1, 11)}
+        occupied_seats = {x['seat'] for x in self.tickets.values('seat')}
+        return sorted(seats - occupied_seats)

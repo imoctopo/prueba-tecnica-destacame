@@ -39,12 +39,14 @@
         <td>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <router-link
+                title="Edit"
                 class="btn btn-warning mr-3"
                 :to="{name: 'PassengerEditor', params: {id: passenger.id}}"
             >
               <i class="bi bi-eye"></i>
             </router-link>
             <button
+                title="Delete"
                 class="btn btn-danger"
                 @click="deletePassenger(passenger.id)"
             >

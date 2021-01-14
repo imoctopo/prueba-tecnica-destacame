@@ -39,12 +39,14 @@
         <td>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <router-link
+                title="Edit"
                 class="btn btn-warning mr-3"
                 :to="{name: 'DriverEditor', params: {id: driver.id}}"
             >
               <i class="bi bi-eye"></i>
             </router-link>
             <button
+                title="Delete"
                 class="btn btn-danger"
                 @click="deleteDriver(driver.id)"
             >

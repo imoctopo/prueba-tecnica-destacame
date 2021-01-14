@@ -22,7 +22,8 @@
         <th>#</th>
         <th class="col-4">Route</th>
         <th class="col-4">Bus</th>
-        <th class="col-4">Date</th>
+        <th class="col-3">Date</th>
+        <th class="col-1">Free Seats</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -44,15 +45,25 @@
           <span v-else>no driver set yet...</span>
         </td>
         <td>{{ ride.schedule | moment("MMMM Do YYYY [at] h:mm A") }}</td>
+        <td align="center">{{ ride.free_seats.length }}</td>
         <td>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <router-link
+                title="Edit"
                 class="btn btn-warning mr-3"
                 :to="{name: 'RideEditor', params: {id: ride.id}}"
             >
               <i class="bi bi-eye"></i>
             </router-link>
+            <router-link
+                title="New Ticket"
+                class="btn btn-success mr-3"
+                :to="{name: 'TicketEditor', params: {rideId: ride.id, id: 'new'}}"
+            >
+              <i class="bi bi-card-heading"></i>
+            </router-link>
             <button
+                title="Delete"
                 class="btn btn-danger"
                 @click="deleteRide(ride.id)"
             >
