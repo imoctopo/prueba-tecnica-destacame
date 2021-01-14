@@ -29,7 +29,7 @@
       </thead>
       <tbody>
       <tr v-if="routes.length === 0">
-        <td colspan="5">No routes found</td>
+        <td colspan="6">No routes found</td>
       </tr>
       <tr
           v-for="(route, index) in routes"
