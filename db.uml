@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>7278afd1-8335-4997-9770-aa006e808a85.SCHEMA:main</OriginalElement>
+  <nodes>
+    <node x="212.0" y="320.0">7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.rides_ride</node>
+    <node x="280.5" y="149.0">7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.routes_route</node>
+    <node x="105.00000000000004" y="0.0">7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.drivers_driver</node>
+    <node x="113.41396103896105" y="548.7245670995669">7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.rides_ticket</node>
+    <node x="99.50000000000004" y="160.0">7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.buses_bus</node>
+    <node x="0.6439393939393909" y="328.74621212121207">7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.passengers_passenger</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.buses_bus" target="7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.drivers_driver">
+      <point x="0.0" y="-49.5" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.rides_ticket" target="7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.rides_ride">
+      <point x="37.0" y="-60.5" />
+      <point x="224.0" y="466.0" />
+      <point x="278.0" y="466.0" />
+      <point x="0.0" y="60.5" />
+    </edge>
+    <edge source="7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.rides_ride" target="7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.routes_route">
+      <point x="33.00000000000003" y="-60.5" />
+      <point x="311.00000000000006" y="295.0" />
+      <point x="376.0" y="295.0" />
+      <point x="0.0" y="60.5" />
+    </edge>
+    <edge source="7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.rides_ticket" target="7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.passengers_passenger">
+      <point x="-37.0" y="-60.5" />
+      <point x="150.0" y="466.0" />
+      <point x="96.0" y="466.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.rides_ride" target="7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.buses_bus">
+      <point x="-32.99999999999997" y="-60.5" />
+      <point x="245.00000000000006" y="295.0" />
+      <point x="180.00000000000006" y="295.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="236.0" y="335.0" />
+  <SelectedNodes>
+    <node>7278afd1-8335-4997-9770-aa006e808a85.TABLE:main.rides_ride</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
