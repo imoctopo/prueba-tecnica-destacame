@@ -8,8 +8,6 @@ from ..serializers import RouteSerializer
 from ...buses.models import Bus
 from ...buses.serializers import BusSerializer
 from ...common.pagination import DefaultPagination
-from ...rides.serializers import TicketDetailSerializer, RideDetailSerializer
-from ...rides.views import TicketViewSet, RideViewSet
 
 
 class RouteViewSet(viewsets.ModelViewSet):
@@ -31,21 +29,3 @@ class RouteViewSet(viewsets.ModelViewSet):
             rides = rides.filter(tickets_sold_percent__gte=percent)
         buses_ = Bus.objects.filter(rides__in=rides).distinct()
         return Response(BusSerializer(buses_, many=True).data)
-
-
-class RouteRideViewSet(RideViewSet):
-    serializer_class = RideDetailSerializer
-    remove_fields = ['route']
-
-    def get_queryset(self):
-        route = self.route
-        return route.rides
-
-
-class RouteRideTicketViewSet(TicketViewSet):
-    serializer_class = TicketDetailSerializer
-    remove_fields = ['ride']
-
-    def get_queryset(self):
-        ride = self.ride
-        return ride.tickets

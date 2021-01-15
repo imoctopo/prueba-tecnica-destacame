@@ -1,7 +1,7 @@
 # Prueba Técnica Destácame
 Desarrollo de prueba técnica para postulación en Destacame.
 
-Modelo de datos usado: ver archivo del repositorio **/db.uml**
+Modelo de datos usado: ver archivo del repositorio **/db.uml** o **/db.png**
 
 #### Vista previa: http://138.68.25.182:8080/
 

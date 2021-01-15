@@ -21,8 +21,9 @@
       <tr>
         <th>#</th>
         <th>Number</th>
-        <th width="50%">Starting Address</th>
-        <th width="50%">Ending Address</th>
+        <th width="33%">Starting Address</th>
+        <th width="33%">Ending Address</th>
+        <th class="33%">Average Seats Sold</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -40,6 +41,7 @@
         </td>
         <td>{{ route.starting_address }}</td>
         <td>{{ route.ending_address }}</td>
+        <td>{{ route.passengers_average }}</td>
         <td>
           <div class="btn-group">
             <router-link

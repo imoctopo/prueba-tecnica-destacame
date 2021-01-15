@@ -25,6 +25,7 @@ SECRET_KEY = 'g6u!q(jlqo&y54_*3bue(+lmu2z1wbphv(vkhnefgbub_m8ut8'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '127.0.0.1',
     'localhost',
     'localhost:8000',
     'localhost:8080',
@@ -140,6 +141,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Django REST Framework
 CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1',
     'http://localhost',
     'http://localhost:8080',
     'http://138.68.25.182',

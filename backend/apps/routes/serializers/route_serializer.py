@@ -5,6 +5,7 @@ from ...common.errors_messages import INVALID_EXACT_LENGTH
 
 class RouteSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False, allow_null=True)
+    passengers_average = serializers.ReadOnlyField()
 
     class Meta:
         model = Route

@@ -1,1 +1,1 @@
-from .routes_views import RouteViewSet, RouteRideViewSet, RouteRideTicketViewSet
+from .routes_views import RouteViewSet

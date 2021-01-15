@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Count, Avg
 
 
 class Route(models.Model):
@@ -8,6 +9,12 @@ class Route(models.Model):
 
     def __str__(self):
         return f'{self.number}'
+
+    @property
+    def passengers_average(self):
+        avg = self.rides.annotate(tickets_sold=Count('tickets'))
+        avg = avg.aggregate(avg=Avg('tickets_sold'))
+        return round(avg['avg'], 1) if avg['avg'] else 0
 
     def save(self, *args, **kwargs):
         self.number = str(self.number).upper()
