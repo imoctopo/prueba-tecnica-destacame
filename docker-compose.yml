@@ -16,8 +16,6 @@ services:
     build: ./backend
     volumes:
       - static_volume:/src/static
-    ports:
-      - 8000:8000
 
   frontend:
     container_name: frontend
