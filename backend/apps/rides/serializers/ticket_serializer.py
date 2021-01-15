@@ -23,7 +23,7 @@ class TicketSerializer(serializers.ModelSerializer):
         ride = attrs['ride']
         passenger = attrs['passenger']
         ticket_pk = self.instance.id if self.instance else None
-        if ride.tickets.all().count() >= 10:
+        if ride.tickets.all().exclude(pk=ticket_pk).count() >= 10:
             raise serializers.ValidationError({'ticket': [NO_FREE_SEATS]})
         if taken := ride.tickets.filter(seat=attrs['seat']).exclude(pk=ticket_pk).first():
             raise serializers.ValidationError({'seat': [SEAT_TAKEN % taken.passenger]})

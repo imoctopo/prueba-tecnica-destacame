@@ -20,8 +20,8 @@
       <thead>
       <tr>
         <th>#</th>
-        <th>Driver</th>
-        <th>Licence Plate</th>
+        <th width="50%">Driver</th>
+        <th width="50%">Licence Plate</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -34,16 +34,16 @@
           :key="index"
       >
         <td>{{ bus.id }}</td>
-        <td class="col-6">
+        <td>
           <span v-if="bus.driver">{{ bus.driver.name }} {{ bus.driver.last_name }}</span>
           <span v-else>No driver set...</span>
         </td>
-        <td class="col-6">{{ bus.licence_plate }}</td>
+        <td>{{ bus.licence_plate }}</td>
         <td>
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="btn-group">
             <router-link
                 title="Edit"
-                class="btn btn-warning mr-3"
+                class="btn btn-warning"
                 :to="{name: 'BusEditor', params: {id: bus.id}}"
             >
               <i class="bi bi-eye"></i>

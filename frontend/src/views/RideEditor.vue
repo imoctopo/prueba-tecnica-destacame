@@ -6,7 +6,7 @@
     <form @submit.prevent="saveRide()">
       <div class="form-group">
         <label for="route">Route</label>
-        <select class="form-select" id="route" v-model="route_id" required>
+        <select class="form-control" id="route" v-model="route_id" required>
           <option disabled>Select an element</option>
           <option
               v-for="route in routes"
@@ -21,7 +21,7 @@
       </div>
       <div class="form-group mt-4">
         <label for="bus">Bus</label>
-        <select class="form-select" id="bus" v-model="bus_id" required>
+        <select class="form-control" id="bus" v-model="bus_id" required>
           <option disabled>Select an element</option>
           <option
               v-for="bus in buses"
@@ -75,11 +75,11 @@
         <thead>
         <tr>
           <th>#</th>
-          <th>Passenger</th>
-          <th>Seat</th>
-          <th>Bus</th>
-          <th>Driver</th>
-          <th>Date</th>
+          <th width="23%">Passenger</th>
+          <th width="5%">Seat</th>
+          <th width="23%">Bus</th>
+          <th width="23%">Driver</th>
+          <th width="26%">Date</th>
           <th>Actions</th>
         </tr>
         </thead>
@@ -95,7 +95,7 @@
           <td>
             {{ ticket.passenger.name }} {{ ticket.passenger.last_name }}
           </td>
-          <td>{{ ticket.seat }}</td>
+          <td align="center">{{ ticket.seat }}</td>
           <td>
             Licence plate: <strong>{{ ride.bus.licence_plate }}</strong>
           </td>
@@ -107,10 +107,10 @@
           </td>
           <td>{{ ride.schedule | moment("MMMM Do YYYY [at] h:mm A") }}</td>
           <td>
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <div class="btn-group">
               <router-link
                   title="Edit"
-                  class="btn btn-warning mr-3"
+                  class="btn btn-warning"
                   :to="{name: 'TicketEditor', params: {rideId: ride.id, id: ticket.id}}"
               >
                 <i class="bi bi-eye"></i>

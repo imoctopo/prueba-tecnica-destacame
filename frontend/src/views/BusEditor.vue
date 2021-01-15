@@ -6,7 +6,7 @@
     <form @submit.prevent="saveBus()">
       <div class="form-group">
         <label for="driver">Driver</label>
-        <select class="form-select" id="driver" v-model="driver_id">
+        <select class="form-control" id="driver" v-model="driver_id">
           <option disabled>Select an element</option>
           <option
               v-for="driver in drivers"

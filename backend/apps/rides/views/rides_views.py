@@ -1,4 +1,5 @@
-from rest_framework import viewsets, status, mixins
+from django.db.models import Count
+from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -18,7 +19,7 @@ class RideViewSet(viewsets.GenericViewSet):
         return super().paginate_queryset(queryset)
 
     def get_queryset(self):
-        return Ride.objects.all()
+        return Ride.objects.all().order_by('id')
 
     def create(self, request):
         serializer = RideSerializer(data=request.data)
@@ -41,7 +42,12 @@ class RideViewSet(viewsets.GenericViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def list(self, request):
-        queryset = self.filter_queryset(self.get_queryset())
+        queryset = self.get_queryset()
+        percentage = request.query_params.get('percentage', 0)
+        if percentage.isnumeric():
+            queryset = queryset.annotate(sold_tickets=Count('tickets') * 10).filter(sold_tickets__gte=percentage)
+            for algo in queryset:
+                print(algo.sold_tickets)
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
@@ -83,6 +89,7 @@ class TicketViewSet(viewsets.GenericViewSet):
 
     def update(self, request, **kwargs):
         ticket: Ticket = self.get_object()
+        print(ticket)
         serializer = TicketSerializer(instance=ticket, data={**request.data, 'ride': self.ride.id})
         serializer.is_valid(raise_exception=True)
         ticket = serializer.save()

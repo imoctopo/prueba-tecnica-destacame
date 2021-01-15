@@ -6,7 +6,7 @@
     <form @submit.prevent="savePassenger()">
       <div class="form-group">
         <label for="passenger">Passenger</label>
-        <select class="form-select" id="passenger" v-model="passengerId" required>
+        <select class="form-control" id="passenger" v-model="passengerId" required>
           <option disabled>Select an element</option>
           <option
               v-for="passenger in passengers"
@@ -21,7 +21,7 @@
       </div>
       <div class="form-group mt-4">
         <label for="seat">Seat</label>
-        <select class="form-select" id="seat" v-model="seat" required>
+        <select class="form-control" id="seat" v-model="seat" required>
           <option disabled v-if="seats.length > 0">Select an element</option>
           <option disabled v-else>Sold Out!</option>
           <option
@@ -94,17 +94,12 @@ export default {
   mounted() {
     APIService.init();
     this.rideId = this.$route.params.rideId;
-    let [home, rides, ride, ticketEditor] = this.$route.meta.breadcrumb;
-    ride.name = this.rideId;
-    ride.link = `/rides/${this.rideId}`;
-    this.breadcrumb = [home, rides, ride, ticketEditor];
     this.fetchRide();
     this.fetchPassengers();
     this.fetchFreeSeats();
     const id = this.$route.params.id;
-    if (id !== 'new') {
-      this.fetchTicket(id);
-    }
+    if (id !== 'new') this.fetchTicket(id);
+    else this.createBreadcrumbs('new');
   },
   methods: {
     async fetchTicket(id) {
@@ -113,6 +108,8 @@ export default {
       this.passengerId = data.passenger.id;
       this.seat = data.seat;
       this.orderSeats(this.seat);
+      if (id)
+        this.createBreadcrumbs(this.ticket.id);
     },
     async fetchRide() {
       const {data} = await APIService.get('rides', this.rideId);
@@ -143,6 +140,13 @@ export default {
     orderSeats(ticketSeat) {
       this.seats.push(ticketSeat);
       this.seats.sort((a, b) => a - b);
+    },
+    createBreadcrumbs(id) {
+      let [home, rides, ride, ticketEditor] = this.$route.meta.breadcrumb;
+      ride.name = this.rideId;
+      ride.link = `/rides/${this.rideId}`;
+      ticketEditor.name = id === 'new' ? 'New Ticket' : 'Ticket #' + id
+      this.breadcrumb = [home, rides, ride, ticketEditor];
     }
   }
 }

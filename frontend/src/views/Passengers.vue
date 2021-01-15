@@ -20,8 +20,8 @@
       <thead>
       <tr>
         <th>#</th>
-        <th>Name</th>
-        <th>Last Name</th>
+        <th width="50%">Name</th>
+        <th width="50%">Last Name</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -34,13 +34,13 @@
           :key="index"
       >
         <td>{{ passenger.id }}</td>
-        <td class="col-6">{{ passenger.name }}</td>
-        <td class="col-6">{{ passenger.last_name }}</td>
+        <td>{{ passenger.name }}</td>
+        <td>{{ passenger.last_name }}</td>
         <td>
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="btn-group">
             <router-link
                 title="Edit"
-                class="btn btn-warning mr-3"
+                class="btn btn-warning"
                 :to="{name: 'PassengerEditor', params: {id: passenger.id}}"
             >
               <i class="bi bi-eye"></i>

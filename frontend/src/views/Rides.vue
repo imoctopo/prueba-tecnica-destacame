@@ -6,24 +6,25 @@
         <h1>Rides</h1>
       </div>
       <div class="col">
-        <div class="d-flex flex-row-reverse">
-          <router-link
-              class="btn btn-success float-right"
-              :to="{name: 'RideEditor', params: {id:'new'}}"
-          >
-            <i class="bi bi-plus-circle"></i> New
-          </router-link>
-        </div>
+        <input class="form-control" type="number" placeholder="Filter by percentage of sold seats..." v-model="percentage" @keyup="fetchRides(percentage)">
+      </div>
+      <div class="col">
+        <router-link
+            class="btn btn-success float-right ml-2"
+            :to="{name: 'RideEditor', params: {id:'new'}}"
+        >
+          <i class="bi bi-plus-circle"></i> New
+        </router-link>
       </div>
     </div>
     <table class="table table-bordered">
       <thead>
       <tr>
         <th>#</th>
-        <th class="col-4">Route</th>
-        <th class="col-4">Bus</th>
-        <th class="col-3">Date</th>
-        <th class="col-1">Free Seats</th>
+        <th width="24%">Route</th>
+        <th width="28%">Bus</th>
+        <th width="28%">Date</th>
+        <th width="20%">Free Seats</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -45,19 +46,19 @@
           <span v-else>no driver set yet...</span>
         </td>
         <td>{{ ride.schedule | moment("MMMM Do YYYY [at] h:mm A") }}</td>
-        <td align="center">{{ ride.free_seats.length }}</td>
+        <td align="center">{{ ride.free_seats.length }} [{{ 100 - (ride.free_seats.length * 10) }}% tickets sold]</td>
         <td>
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="btn-group">
             <router-link
                 title="Edit"
-                class="btn btn-warning mr-3"
+                class="btn btn-warning"
                 :to="{name: 'RideEditor', params: {id: ride.id}}"
             >
               <i class="bi bi-eye"></i>
             </router-link>
             <router-link
                 title="New Ticket"
-                class="btn btn-success mr-3"
+                class="btn btn-success"
                 :to="{name: 'TicketEditor', params: {rideId: ride.id, id: 'new'}}"
             >
               <i class="bi bi-card-heading"></i>
@@ -95,15 +96,20 @@ export default {
   data() {
     return {
       rides: [],
+      percentage: null,
       activePage: 1,
       totalPages: 1,
       next: null,
       previous: null
     }
   },
+  mounted() {
+    APIService.init();
+    this.fetchRides(0);
+  },
   methods: {
-    async fetchRides() {
-      const {data} = await APIService.list(`rides?page=${this.activePage}`);
+    async fetchRides(percentage) {
+      const {data} = await APIService.list(`rides?page=${this.activePage}&percentage=${percentage}`);
       this.rides = data.results;
       this.next = data.next;
       this.previous = data.previous;
@@ -120,10 +126,6 @@ export default {
       this.activePage = page;
       this.fetchRides();
     }
-  },
-  mounted() {
-    APIService.init();
-    this.fetchRides();
   }
 }
 </script>
