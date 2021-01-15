@@ -7,7 +7,7 @@ services:
       - "8000:80"
     volumes:
       - ./backend/default.conf:/etc/nginx/conf.d/default.conf
-      - static_volume:/app/backend/static
+      - static_volume:/src/static
     depends_on:
       - backend
 
@@ -15,18 +15,15 @@ services:
     container_name: backend
     build: ./backend
     volumes:
-      - ./backend:/app/backend
-      - static_volume:/app/backend/static
-    command: bash -c "ls && python manage.py migrate && python manage.py collectstatic --no-input --clear &&
-      gunicorn config.wsgi:application --workers 4 --bind :8000 --reload --timeout 90"
+      - static_volume:/src/static
+    ports:
+      - 8000:8000
 
   frontend:
     container_name: frontend
     build: ./frontend
-    volumes:
-      - ./frontend:/app/frontend
     ports:
-      - 8080:8080
+      - 8080:80
     depends_on:
       - backend
 

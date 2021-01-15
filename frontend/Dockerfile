@@ -1,6 +1,11 @@
-FROM node:12.19.0-alpine
-WORKDIR /app/frontend
-COPY package.json /app/frontend
-RUN yarn install
-EXPOSE 8080
-CMD yarn serve
+FROM node:12.19.0-alpine as build-stage
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY ./ .
+RUN npm run build
+
+FROM nginx as production-stage
+RUN mkdir /app
+COPY --from=build-stage /app/dist /app
+COPY nginx.conf /etc/nginx/nginx.conf
